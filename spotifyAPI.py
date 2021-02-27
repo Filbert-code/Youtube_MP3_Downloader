@@ -14,6 +14,7 @@ PLAYLIST_NAME = ['Coding', 'Hacking']
 PLAYLIST_USERNAME = 'dewanderer'
 PLAYLIST_ID = ''
 
+curr_directory = os.getcwd()
 
 
 def spotify_track_names():
@@ -56,7 +57,7 @@ def youtube_to_mp3(track_links):
             with youtube_dl.YoutubeDL(ydl_opts) as ydl:
                 ydl.download([track])
         except Exception as e:
-            print(track + " - " + e)
+            print(track + " - " + str(e))
 
 def get_youtube_links(track_names):
     track_links = []
@@ -81,8 +82,8 @@ def get_youtube_links(track_names):
     return track_links
 
 
-def append_to_file(list):
-    with open('youtube_links.txt', 'w') as writer:
+def append_to_file(file_name, list):
+    with open(file_name, 'w') as writer:
         for item in list:
             writer.writelines(item + "\n")
 
@@ -108,7 +109,7 @@ if __name__ == '__main__':
     #     PLAYLIST_ID = playlist_dict[username]
     #     tracks = spotify_track_names()
     #     track_links = get_youtube_links(tracks)
-    #     append_to_file(track_links)
+    #     append_to_file(username + '.txt', track_links)
 
     # gets filenames for all text files in the current directory
     link_files = glob.glob('*.txt')
