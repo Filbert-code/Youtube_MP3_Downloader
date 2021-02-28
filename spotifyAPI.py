@@ -32,7 +32,7 @@ def spotify_track_names():
         #         print(item['name'])
         #         print(item['id'])
 
-        results = spotify.user_playlist_tracks(PLAYLIST_USERNAME, PLAYLIST_ID)
+        results = spotify.playlist_tracks(PLAYLIST_ID)
         tracks_res = results['items']
         while results['next']:
             results = spotify.next(results)
@@ -97,19 +97,17 @@ def text_to_track_links(file):
 
 
 if __name__ == '__main__':
-    playlist_dict = {
-        'alexlingfungfilbert':'2bO250NJik0KArLd0Gr9Sz',
-        'david':'7JirxyGz96TkdPzVK40Rdw',
-        'gmerdelta':'79EflHPZ5AaGikNUFbRGp6',
-        'Oscar Lallier': '6yPiKpy7evrwvZodByKvM9',
-    }
-
-    # for username in playlist_dict:
-    #     PLAYLIST_USERNAME = username
-    #     PLAYLIST_ID = playlist_dict[username]
-    #     tracks = spotify_track_names()
-    #     track_links = get_youtube_links(tracks)
-    #     append_to_file(username + '.txt', track_links)
+    playlist_list = [
+        '7ozIozDp260fjNOZy1yzRG',
+        '37i9dQZF1DX5trt9i14X7j',
+        '2rN3mSrzUcgjlj1TcEDTX7',
+        '6FKDzNYZ8IW1pvYVF4zUN2',
+    ]
+    for playlist in playlist_list:
+        PLAYLIST_ID = playlist
+        tracks = spotify_track_names()
+        track_links = get_youtube_links(tracks[:10])
+        append_to_file(playlist + '.txt', track_links)
 
     # gets filenames for all text files in the current directory
     link_files = glob.glob('*.txt')
